@@ -127,6 +127,13 @@ const Rational& Rational::operator/=(const Rational& other) {
     return *this;
 }
 
+const Rational Rational::operator=(const Rational &other) {
+    num = other.GetNumerator();
+    den = other.GetDenominator();
+    Reduce();
+    return *this
+}
+
 const Rational& Rational::operator*=(const Rational& other) {
     num = GetNumerator() * other.GetNumerator();
     den = GetDenominator() * other.GetDenominator();
