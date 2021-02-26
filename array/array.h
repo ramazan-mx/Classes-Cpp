@@ -14,11 +14,11 @@ template <class T, size_t N>
 struct Array {
     T arr[N];
 
-    T& operator[](const size_t& index) {
+    T& operator[](size_t index) {
         return arr[index];
     }
 
-    const T& operator[](const size_t& index) const {
+    const T& operator[](size_t index) const {
         return arr[index];
     }
 
@@ -42,9 +42,9 @@ struct Array {
         return &(arr[0]);
     }
 
-    /*T* Data() const {
-        return arr;
-    }*/
+    const T* Data() const {
+        return &(arr[0]);
+    }
 
     size_t Size() const {
         return N;
