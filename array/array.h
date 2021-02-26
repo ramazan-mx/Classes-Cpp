@@ -96,7 +96,7 @@ struct Array {
         return (pos == N);
     }
 
-    bool operator!=(const Array<T, N>& other) {
+    bool operator!=(const Array<T, N>& other) const {
         size_t pos = 0;
         while (pos < N && arr[pos] == other.arr[pos]) {
             pos++;
@@ -104,7 +104,7 @@ struct Array {
         return (pos != N);
     }
 
-    bool operator>=(const Array<T, N>& other) {
+    bool operator>=(const Array<T, N>& other) const {
         size_t pos = 0;
         while (pos < N && arr[pos] == other.arr[pos]) {
             pos++;
@@ -112,11 +112,11 @@ struct Array {
         return ((pos < N && arr[pos] > other.arr[pos]) || pos == N);
     }
 
-    bool operator>(const Array<T, N>& other) {
+    bool operator>(const Array<T, N>& other) const {
         return (*this >= other && *this != other);
     }
 
-    bool operator<=(const Array<T, N>& other) {
+    bool operator<=(const Array<T, N>& other) const {
         return (*this < other || *this == other);
     }
 };
