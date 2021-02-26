@@ -104,6 +104,12 @@ struct Array {
         return (pos != N);
     }
 
+    void operator=(const Array<T, N>& other) const {
+        for (size_t i = 0; i < N; ++i) {
+            *this[i] = other[i];
+        }
+    }
+
     bool operator>=(const Array<T, N>& other) const {
         size_t pos = 0;
         while (pos < N && arr[pos] == other.arr[pos]) {
