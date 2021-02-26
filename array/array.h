@@ -39,7 +39,7 @@ struct Array {
     }
 
     T* Data() {
-        return arr;
+        return &(arr[0]);
     }
 
     /*T* Data() const {
@@ -104,11 +104,11 @@ struct Array {
         return (pos != N);
     }
 
-    void operator=(const Array<T, N>& other) const {
+    /*void operator=(const Array<T, N>& other) {
         for (size_t i = 0; i < N; ++i) {
             *this[i] = other[i];
         }
-    }
+    }*/
 
     bool operator>=(const Array<T, N>& other) const {
         size_t pos = 0;
