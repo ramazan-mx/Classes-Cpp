@@ -113,11 +113,11 @@ struct Array {
     }
 
     bool operator>(const Array<T, N>& other) const {
-        return (*this >= other && *this != other);
+        return (operator>=(other) && operator!=(other));
     }
 
     bool operator<=(const Array<T, N>& other) const {
-        return (*this < other || *this == other);
+        return (operator<(other) || operator==(other));
     }
 };
 
