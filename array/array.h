@@ -6,14 +6,15 @@
 
 class ArrayOutOfRange : public std::out_of_range {
 public:
-    ArrayOutOfRange() : std::out_of_range("ArrayOutOfRange") {}
+    ArrayOutOfRange() : std::out_of_range("ArrayOutOfRange") {
+    }
 };
 
 template <class T, size_t N>
 struct Array {
     T arr[N];
 
-    T& operator[](const size_t& index)  {
+    T& operator[](const size_t& index) {
         return arr[index];
     }
 
@@ -22,7 +23,7 @@ struct Array {
     }
 
     T& Back() {
-        return arr[N-1];
+        return arr[N - 1];
     }
 
     T Back() const {
@@ -62,17 +63,15 @@ struct Array {
     T& At(size_t idx) {
         if (idx > N - 1) {
             throw ArrayOutOfRange{};
-        } else {
-            return arr[idx];
         }
+        return arr[idx];
     }
 
     T At(size_t idx) const {
         if (idx > N - 1) {
             throw ArrayOutOfRange{};
-        } else {
-            return arr[idx];
         }
+        return arr[idx];
     }
 
     void Swap(Array<T, N>& other) {  // NOLINT
@@ -110,11 +109,11 @@ struct Array {
         while (pos < N && arr[pos] == other.arr[pos]) {
             pos++;
         }
-        return (pos < N && arr[pos] > other.arr[pos] || pos == N);
+        return ((pos < N && arr[pos] > other.arr[pos]) || pos == N);
     }
 
     bool operator>(const Array<T, N>& other) {
-        return (*this >= other && *this != other)
+        return (*this >= other && *this != other);
     }
 
     bool operator<=(const Array<T, N>& other) {
