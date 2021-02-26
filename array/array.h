@@ -18,7 +18,7 @@ struct Array {
         return arr[index];
     }
 
-    T operator[](const size_t& index) const {
+    const T& operator[](const size_t& index) const {
         return arr[index];
     }
 
@@ -26,7 +26,7 @@ struct Array {
         return arr[N - 1];
     }
 
-    T Back() const {
+    const T& Back() const {
         return arr[N - 1];
     }
 
@@ -34,7 +34,7 @@ struct Array {
         return arr[0];
     }
 
-    T Front() const {
+    const T& Front() const {
         return arr[0];
     }
 
@@ -42,9 +42,9 @@ struct Array {
         return arr;
     }
 
-    T* Data() const {
+    /*T* Data() const {
         return arr;
-    }
+    }*/
 
     size_t Size() const {
         return N;
@@ -67,7 +67,7 @@ struct Array {
         return arr[idx];
     }
 
-    T At(size_t idx) const {
+    const T& At(size_t idx) const {
         if (idx > N - 1) {
             throw ArrayOutOfRange{};
         }
