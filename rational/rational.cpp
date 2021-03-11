@@ -33,7 +33,7 @@ Rational::Rational(int x, int y) {
         throw RationalDivisionByZero{};
     }
     num = x,
-            den = y;
+    den = y;
     Reduce();
 }
 
