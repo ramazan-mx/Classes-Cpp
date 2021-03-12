@@ -5,7 +5,6 @@
 
 #include <util/constants.h>
 
-
 class RationalDivisionByZero : public std::runtime_error {
 public:
     RationalDivisionByZero() : std::runtime_error("RationalDivisionByZero") {
@@ -20,21 +19,22 @@ private:
 
 public:
     Rational();
-    Rational(int x);
-    Rational(int x, int y);
+    Rational(int numerator);
+    Rational(int numerator, int denominator);
 
     int GetNumerator() const;
     int GetDenominator() const;
-    void SetNumerator(int x);
-    void SetDenominator(int x);
 
-    friend std::istream& operator>>(std::istream& is, Rational& fraction);
-    friend std::ostream& operator<<(std::ostream& out, Rational& fraction);
+    void SetNumerator(int numerator);
+    void SetDenominator(int denominator);
 
-    const Rational operator+(Rational& other);
-    const Rational operator-(Rational& other);
-    const Rational operator/(Rational& other);
-    const Rational operator*(Rational& other);
+    friend std::istream& operator>>(std::istream& in, Rational& fraction);
+    friend std::ostream& operator<<(std::ostream& out, Rational fraction);
+
+    const Rational operator+(const Rational& other);
+    const Rational operator-(const Rational& other);
+    const Rational operator/(const Rational& other);
+    const Rational operator*(const Rational& other);
 
     const Rational& operator+=(const Rational& other);
     const Rational& operator-=(const Rational& other);
@@ -44,15 +44,18 @@ public:
     const Rational operator+();
     const Rational operator-();
 
-    const Rational operator--();
-    const Rational operator++();
+    const Rational& operator--();
+    const Rational& operator++();
 
-    bool operator<(const Rational& x) const;
-    bool operator==(const Rational& x) const;
-    bool operator!=(const Rational& x) const;
-    bool operator>=(const Rational& x) const;
-    bool operator>(const Rational& x) const;
-    bool operator<=(const Rational& x) const;
+    const Rational operator--(int);
+    const Rational operator++(int);
+
+    bool operator<(const Rational& other);
+    bool operator==(const Rational& other);
+    bool operator!=(const Rational& other);
+    bool operator>=(const Rational& other);
+    bool operator>(const Rational& other);
+    bool operator<=(const Rational& other);
 };
 
 #endif  // RATIONAL_RATIONAL_H
