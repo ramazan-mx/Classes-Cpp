@@ -127,7 +127,7 @@ const Rational& Rational::operator/=(const Rational& other) {
     return *this;
 }
 
-const Rational Rational::operator=(const Rational &other) {
+const Rational& Rational::operator=(const Rational &other) {
     num = other.GetNumerator();
     den = other.GetDenominator();
     Reduce();
