@@ -103,21 +103,21 @@ void Rational::SetDenominator(int denominator) {
     Reduce();
 }
 
-const Rational& Rational::operator+=(const Rational& other) {
+Rational& Rational::operator+=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
     return *this;
 }
 
-const Rational& Rational::operator-=(const Rational& other) {
+Rational& Rational::operator-=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
     return *this;
 }
 
-const Rational& Rational::operator/=(const Rational& other) {
+Rational& Rational::operator/=(const Rational& other) {
     if (other.num == 0) {
         throw RationalDivisionByZero();  //  NOLINT
     }
@@ -127,73 +127,66 @@ const Rational& Rational::operator/=(const Rational& other) {
     return *this;
 }
 
-const Rational& Rational::operator=(const Rational &other) {
-    num = other.GetNumerator();
-    den = other.GetDenominator();
-    Reduce();
-    return *this
-}
-
-const Rational& Rational::operator*=(const Rational& other) {
+Rational& Rational::operator*=(const Rational& other) {
     num = GetNumerator() * other.GetNumerator();
     den = GetDenominator() * other.GetDenominator();
     Reduce();
     return *this;
 }
 
-const Rational Rational::operator+(const Rational& other) {
+Rational Rational::operator+(const Rational& other) {
     Rational copy = *this;
     copy += other;
     return copy;
 }
 
-const Rational Rational::operator-(const Rational& other) {
+Rational Rational::operator-(const Rational& other) {
     Rational copy = *this;
     copy -= other;
     return copy;
 }
 
-const Rational Rational::operator/(const Rational& other) {
+Rational Rational::operator/(const Rational& other) {
     Rational copy = *this;
     copy /= other;
     return copy;
 }
 
-const Rational Rational::operator*(const Rational& other) {
+Rational Rational::operator*(const Rational& other) {
     Rational copy = *this;
     copy *= other;
     return copy;
 }
 
-const Rational Rational::operator+() {
+Rational Rational::operator+() {
     return *this;
 }
 
-const Rational Rational::operator-() {
+Rational Rational::operator-() {
     Rational temp(-GetNumerator(), GetDenominator());
     return temp;
 }
 
-const Rational Rational::operator--(int) {
+Rational Rational::operator--(int) {
     Reduce();
     Rational temp = *this;
     SetNumerator(num - den);
     return temp;
 }
 
-const Rational Rational::operator++(int) {
+Rational Rational::operator++(int) {
     Reduce();
     Rational temp = *this;
     SetNumerator(num + den);
     return temp;
 }
 
-const Rational& Rational::operator--() {
+Rational& Rational::operator--() {
     SetNumerator(num - den);
     return *this;
 }
 
-const Rational& Rational::operator++() {
+Rational& Rational::operator++() {
     SetNumerator(num + den);
     return *this;
 }
