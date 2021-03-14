@@ -37,7 +37,7 @@ public:
     Rational operator/(const Rational& other) const;
     Rational operator*(const Rational& other) const;
 
-    Rational& operator=(const Rational& other);
+    const Rational& operator=(const Rational& other);
 
     Rational& operator+=(const Rational& other);
     Rational& operator-=(const Rational& other);

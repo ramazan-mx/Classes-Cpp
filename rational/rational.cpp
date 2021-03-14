@@ -109,7 +109,7 @@ void Rational::SetDenominator(int denominator) {
     Reduce();
 }
 
-Rational& Rational::operator=(const Rational& other) {
+const Rational& Rational::operator=(const Rational& other) {
     num = other.num;
     den = other.den;
     Reduce();
@@ -208,7 +208,7 @@ Rational& Rational::operator++() {
 }
 
 bool Rational::operator<(const Rational& other) const {
-    return (num * other.den < den * other.num);
+    return (((*this) - other).GetNumerator() < 0);
 }
 
 bool Rational::operator==(const Rational& other) const {
