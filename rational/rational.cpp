@@ -12,6 +12,9 @@ int GCD(int u, int v) {
 }
 
 void Rational::Reduce() {
+    if (den == 0) {
+        throw RationalDivisionByZero{};
+    }
     int gcd = GCD(abs(num), abs(den));
     if (den < 0) {
         den *= -1;
@@ -74,9 +77,6 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
             x *= 10;
             x += str[i] - '0';
         }
-        if (x == 0) {
-            throw RationalDivisionByZero{};
-        }
         fraction.den = (x * mod);
     } else {
         fraction.SetDenominator(1);
@@ -108,9 +108,6 @@ void Rational::SetNumerator(int numerator) {
 }
 
 void Rational::SetDenominator(int denominator) {
-    if (denominator == 0) {
-        throw RationalDivisionByZero{};
-    }
     den = denominator;
     Reduce();
 }
@@ -137,9 +134,6 @@ Rational& Rational::operator-=(const Rational& other) {
 }
 
 Rational& Rational::operator/=(const Rational& other) {
-    if (other.GetNumerator() == 0) {
-        throw RationalDivisionByZero{};
-    }
     num = GetNumerator() * other.GetDenominator();
     den = GetDenominator() * other.GetNumerator();
     Reduce();
