@@ -63,7 +63,7 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
         x += str[i] - '0';
     }
     fraction.num = (x * mod);
-    if (str[i] != 0) {
+    if (str[i] != '\0') {
         ++i;
         x = 0;
         mod = 1;
@@ -100,6 +100,7 @@ int Rational::GetNumerator() const {
 
 int Rational::GetDenominator() const {
     return den;
+    std::cerr << num << " " << den << endl;
 }
 
 void Rational::SetNumerator(int numerator) {
@@ -116,6 +117,7 @@ const Rational& Rational::operator=(const Rational& other) {
     num = other.num;
     den = other.den;
     Reduce();
+    std::cerr << = << num << " " << den << endl;
     return *this;
 }
 
@@ -123,6 +125,7 @@ Rational& Rational::operator+=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
+    std::cerr << += << num << " " << den << endl;
     return *this;
 }
 
@@ -130,6 +133,7 @@ Rational& Rational::operator-=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
+    std::cerr << -= << num << " " << den << endl;
     return *this;
 }
 
@@ -137,6 +141,7 @@ Rational& Rational::operator/=(const Rational& other) {
     num = GetNumerator() * other.GetDenominator();
     den = GetDenominator() * other.GetNumerator();
     Reduce();
+    std::cerr << /= << num << " " << den << endl;
     return *this;
 }
 
@@ -144,6 +149,7 @@ Rational& Rational::operator*=(const Rational& other) {
     num = GetNumerator() * other.GetNumerator();
     den = GetDenominator() * other.GetDenominator();
     Reduce();
+    std::cerr << *= << num << " " << den << endl;
     return *this;
 }
 
