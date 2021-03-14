@@ -109,7 +109,7 @@ void Rational::SetDenominator(int denominator) {
     Reduce();
 }
 
-Rational& Rational::operator=(const Rational &other) {
+Rational& Rational::operator=(const Rational& other) {
     num = other.num;
     den = other.den;
     Reduce();
@@ -148,7 +148,7 @@ Rational& Rational::operator*=(const Rational& other) {
 }
 
 Rational Rational::operator+(const Rational& other) const {
-    Rational copy = *this;;
+    Rational copy = *this;
     copy += other;
     return copy;
 }
