@@ -103,6 +103,13 @@ void Rational::SetDenominator(int denominator) {
     Reduce();
 }
 
+Rational& Rational::operator=(const Rational &other) {
+    num = other.num;
+    den = other.den;
+    Reduce();
+    return *this;
+}
+
 Rational& Rational::operator+=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
