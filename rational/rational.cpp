@@ -4,7 +4,7 @@
 #include "rational.h"
 
 int GCD(int u, int v) {
-    while (v) {
+    while (v && u) {
         u %= v;
         std::swap(u, v);
     }
@@ -141,8 +141,8 @@ Rational& Rational::operator-=(const Rational& other) {
 
 Rational& Rational::operator/=(const Rational& other) {
     std::cerr << "/= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
-    num = GetNumerator() * other.GetDenominator();
-    den = GetDenominator() * other.GetNumerator();
+    num *= other.GetDenominator();
+    den *= other.GetNumerator();
     Reduce();
     std::cerr << "Became " << num << " " << den << "\n";
     return *this;
