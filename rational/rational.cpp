@@ -74,6 +74,9 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
             x *= 10;
             x += str[i] - '0';
         }
+        if (x == 0) {
+            throw RationalDivisionByZero{};
+        }
         fraction.den = (x * mod);
     } else {
         fraction.SetDenominator(1);
@@ -134,6 +137,9 @@ Rational& Rational::operator-=(const Rational& other) {
 }
 
 Rational& Rational::operator/=(const Rational& other) {
+    if (other.GetNumerator() == 0) {
+        throw RationalDivisionByZero{};
+    }
     num = GetNumerator() * other.GetDenominator();
     den = GetDenominator() * other.GetNumerator();
     Reduce();
