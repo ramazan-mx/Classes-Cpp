@@ -18,7 +18,7 @@ private:
     void Reduce();
 
 public:
-    Rational();  //  NOLINT
+    Rational();               //  NOLINT
     Rational(int numerator);  //  NOLINT
     Rational(int numerator, int denominator);
 
