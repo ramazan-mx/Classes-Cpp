@@ -144,8 +144,9 @@ Rational& Rational::operator-=(const Rational& other) {
 
 Rational& Rational::operator/=(const Rational& other) {
     std::cerr << "/= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
-    num *= other.GetDenominator();
-    den *= other.GetNumerator();
+    num *= other.den;
+    den *= other.num;
+    std::cerr << "After mult " num << " " << den << "\n";
     Reduce();
     std::cerr << "Became " << num << " " << den << "\n";
     return *this;
