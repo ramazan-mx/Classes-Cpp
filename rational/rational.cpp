@@ -99,7 +99,7 @@ int Rational::GetNumerator() const {
 }
 
 int Rational::GetDenominator() const {
-    return  den;
+    return den;
 }
 
 void Rational::SetNumerator(int numerator) {
