@@ -18,7 +18,7 @@ void Rational::Reduce() {
     if (den == 0) {
         throw RationalDivisionByZero{};
     }
-    int gcd = GCD(abs(num), abs(den));
+    int gcd = std::__detail::__gcd(abs(num), abs(den));
     if (den < 0) {
         den *= -1;
         num *= -1;
