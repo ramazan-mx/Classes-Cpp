@@ -134,28 +134,28 @@ Rational& Rational::operator*=(const Rational& other) {
     return *this;
 }
 
-const Rational Rational::operator+(const Rational& other) const {
+Rational Rational::operator+(const Rational& other) const {
     Rational copy = *this;
     Rational copy_other = other;
     copy += copy_other;
     return copy;
 }
 
-Rational Rational::operator-(const Rational& other) {
+Rational Rational::operator-(const Rational& other) const {
     Rational copy = *this;
     Rational copy_other = other;
     copy -= copy_other;
     return copy;
 }
 
-Rational Rational::operator/(const Rational& other) {
+Rational Rational::operator/(const Rational& other) const {
     Rational copy = *this;
     Rational copy_other = other;
     copy /= copy_other;
     return copy;
 }
 
-Rational Rational::operator*(const Rational& other) {
+Rational Rational::operator*(const Rational& other) const {
     Rational copy = *this;
     Rational copy_other = other;
     copy *= copy_other;
@@ -195,26 +195,26 @@ Rational& Rational::operator++() {
     return *this;
 }
 
-const bool Rational::operator<(const Rational& other) const {
+bool Rational::operator<(const Rational& other) const {
     return (num * other.den < den * other.num);
 }
 
-const bool Rational::operator==(const Rational& other) const {
+bool Rational::operator==(const Rational& other) const {
     return ((num == other.num) && (den == other.den));
 }
 
-const bool Rational::operator!=(const Rational& other) const {
+bool Rational::operator!=(const Rational& other) const {
     return !operator==(other);
 }
 
-const bool Rational::operator>=(const Rational& other) const {
+bool Rational::operator>=(const Rational& other) const {
     return !operator<(other);
 }
 
-const bool Rational::operator>(const Rational& other) const {
+bool Rational::operator>(const Rational& other) const {
     return (operator>=(other) && operator!=(other));
 }
 
-const bool Rational::operator<=(const Rational& other) const {
+bool Rational::operator<=(const Rational& other) const {
     return (operator<(other) || operator==(other));
 }
