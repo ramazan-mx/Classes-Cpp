@@ -18,7 +18,7 @@ void Rational::Reduce() {
     if (den == 0) {
         throw RationalDivisionByZero{};
     }
-    int gcd = std::__detail::__gcd(abs(num), abs(den));
+    int gcd = GCD(abs(num), abs(den));
     if (den < 0) {
         den *= -1;
         num *= -1;
@@ -116,50 +116,39 @@ void Rational::SetDenominator(int denominator) {
 }
 
 const Rational& Rational::operator=(const Rational& other) {
-    std::cerr << "= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = other.num;
     den = other.den;
     Reduce();
-    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator+=(const Rational& other) {
-    std::cerr << "+= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator-=(const Rational& other) {
-    std::cerr << "-= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator/=(const Rational& other) {
-    std::cerr << "/= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     Rational temp;
     temp.SetNumerator(GetNumerator() * other.GetDenominator());
     temp.SetDenominator(GetDenominator() * other.GetNumerator());
-    std::cerr << "After mult " << num << " " << den << "\n";
     temp.Reduce();
-    std::cerr << "Became " << num << " " << den << "\n";
     *this = temp;
     return *this;
 }
 
 Rational& Rational::operator*=(const Rational& other) {
-    std::cerr << "*= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = GetNumerator() * other.GetNumerator();
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
