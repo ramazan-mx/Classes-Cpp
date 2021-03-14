@@ -8,7 +8,10 @@ int GCD(int u, int v) {
         u %= v;
         std::swap(u, v);
     }
-    return u;
+    if (u) {
+        return u;
+    }
+    return v;
 }
 
 void Rational::Reduce() {
