@@ -58,7 +58,7 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
     } else if (str[0] == '+') {
         ++i;
     }
-    for (; i < MaxStringSize && str[i] >= '0' && str[i] <= '9'; ++i) {
+    for (; str[i] >= '0' && str[i] <= '9'; ++i) {
         x *= 10;
         x += str[i] - '0';
     }
@@ -73,7 +73,7 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
         } else if (str[i] == '+') {
             ++i;
         }
-        for (; i < MaxStringSize && str[i] >= '0' && str[i] <= '9'; ++i) {
+        for (; str[i] >= '0' && str[i] <= '9'; ++i) {
             x *= 10;
             x += str[i] - '0';
         }
@@ -113,8 +113,8 @@ void Rational::SetDenominator(int denominator) {
 }
 
 const Rational& Rational::operator=(const Rational& other) {
-    den = other.den;
     num = other.num;
+    den = other.den;
     Reduce();
     return *this;
 }
