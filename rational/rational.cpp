@@ -230,3 +230,7 @@ bool Rational::operator>(const Rational& other) const {
 bool Rational::operator<=(const Rational& other) const {
     return (operator<(other) || operator==(other));
 }
+
+bool operator>(int num, const Rational& other) const {
+    return (num * other.GetDenominator() > other.GetNumerator());
+}
