@@ -18,8 +18,8 @@ private:
     void Reduce();
 
 public:
-    Rational();
-    Rational(int numerator);
+    Rational();  //  NOLINT
+    Rational(int numerator);  //  NOLINT
     Rational(int numerator, int denominator);
 
     int GetNumerator() const;
