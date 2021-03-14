@@ -113,47 +113,47 @@ void Rational::SetDenominator(int denominator) {
 }
 
 const Rational& Rational::operator=(const Rational& other) {
-    std::cerr << "= " << other.num << " " << other.den << "\n";
+    std::cerr << "= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = other.num;
     den = other.den;
     Reduce();
-    std::cerr << "= " << num << " " << den << "\n";
+    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator+=(const Rational& other) {
-    std::cerr << "+= " << other.num << " " << other.den << "\n";
+    std::cerr << "+= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "+= " << num << " " << den << "\n";
+    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator-=(const Rational& other) {
-    std::cerr << "-= " << other.num << " " << other.den << "\n";
+    std::cerr << "-= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "-= " << num << " " << den << "\n";
+    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator/=(const Rational& other) {
-    std::cerr << "/= " << other.num << " " << other.den << "\n";
+    std::cerr << "/= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = GetNumerator() * other.GetDenominator();
     den = GetDenominator() * other.GetNumerator();
     Reduce();
-    std::cerr << "/= " << num << " " << den << "\n";
+    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
 Rational& Rational::operator*=(const Rational& other) {
-    std::cerr << "*= " << other.num << " " << other.den << "\n";
+    std::cerr << "*= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num = GetNumerator() * other.GetNumerator();
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "*= " << num << " " << den << "\n";
+    std::cerr << "Became " << num << " " << den << "\n";
     return *this;
 }
 
