@@ -146,7 +146,7 @@ Rational& Rational::operator/=(const Rational& other) {
     std::cerr << "/= Was " << num << " " << den << " Other " << other.num << " " << other.den << "\n";
     num *= other.den;
     den *= other.num;
-    std::cerr << "After mult " num << " " << den << "\n";
+    std::cerr << "After mult " << num << " " << den << "\n";
     Reduce();
     std::cerr << "Became " << num << " " << den << "\n";
     return *this;
