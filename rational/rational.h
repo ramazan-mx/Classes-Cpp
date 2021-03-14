@@ -21,6 +21,7 @@ public:
     Rational();               //  NOLINT
     Rational(int numerator);  //  NOLINT
     Rational(int numerator, int denominator);
+    Rational(const Rational& other);
 
     int GetNumerator() const;
     int GetDenominator() const;

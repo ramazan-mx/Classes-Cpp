@@ -36,6 +36,12 @@ Rational::Rational(int numerator, int denominator) {  //  NOLINT
     Reduce();
 }
 
+Rational::Rational(const Rational& other) {
+    num = other.num;
+    den = other.den;
+    Reduce();
+}
+
 std::istream& operator>>(std::istream& in, Rational& fraction) {
     const int MaxStringSize = 32;
     char str[MaxStringSize];
@@ -142,9 +148,8 @@ Rational& Rational::operator*=(const Rational& other) {
 }
 
 Rational Rational::operator+(const Rational& other) const {
-    Rational copy = *this;
-    Rational copy_other = other;
-    copy += copy_other;
+    Rational copy = *this;;
+    copy += other;
     return copy;
 }
 
