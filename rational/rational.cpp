@@ -99,8 +99,7 @@ int Rational::GetNumerator() const {
 }
 
 int Rational::GetDenominator() const {
-    return den;
-    std::cerr << num << " " << den << endl;
+    return  den;
 }
 
 void Rational::SetNumerator(int numerator) {
@@ -117,7 +116,7 @@ const Rational& Rational::operator=(const Rational& other) {
     num = other.num;
     den = other.den;
     Reduce();
-    std::cerr << "= " << num << " " << den << std::endl;
+    std::cerr << "= " << num << " " << den << "\n";
     return *this;
 }
 
@@ -125,7 +124,7 @@ Rational& Rational::operator+=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "+= " << num << " " << den << std::endl;
+    std::cerr << "+= " << num << " " << den << "\n";
     return *this;
 }
 
@@ -133,7 +132,7 @@ Rational& Rational::operator-=(const Rational& other) {
     num = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "-= " << num << " " << den << std::endl;
+    std::cerr << "-= " << num << " " << den << "\n";
     return *this;
 }
 
@@ -141,7 +140,7 @@ Rational& Rational::operator/=(const Rational& other) {
     num = GetNumerator() * other.GetDenominator();
     den = GetDenominator() * other.GetNumerator();
     Reduce();
-    std::cerr << "/= " << num << " " << den << std::endl;
+    std::cerr << "/= " << num << " " << den << "\n";
     return *this;
 }
 
@@ -149,7 +148,7 @@ Rational& Rational::operator*=(const Rational& other) {
     num = GetNumerator() * other.GetNumerator();
     den = GetDenominator() * other.GetDenominator();
     Reduce();
-    std::cerr << "*= " << num << " " << den << std::endl;
+    std::cerr << "*= " << num << " " << den << "\n";
     return *this;
 }
 
