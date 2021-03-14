@@ -105,13 +105,16 @@ void Rational::SetNumerator(int numerator) {
 }
 
 void Rational::SetDenominator(int denominator) {
+    if (denominator == 0) {
+        throw RationalDivisionByZero{};
+    }
     den = denominator;
     Reduce();
 }
 
 const Rational& Rational::operator=(const Rational& other) {
-    num = other.num;
     den = other.den;
+    num = other.num;
     Reduce();
     return *this;
 }
@@ -131,9 +134,6 @@ Rational& Rational::operator-=(const Rational& other) {
 }
 
 Rational& Rational::operator/=(const Rational& other) {
-    if (other.num == 0) {
-        throw RationalDivisionByZero();  //  NOLINT
-    }
     num = GetNumerator() * other.GetDenominator();
     den = GetDenominator() * other.GetNumerator();
     Reduce();
@@ -155,22 +155,19 @@ Rational Rational::operator+(const Rational& other) const {
 
 Rational Rational::operator-(const Rational& other) const {
     Rational copy = *this;
-    Rational copy_other = other;
-    copy -= copy_other;
+    copy -= other;
     return copy;
 }
 
 Rational Rational::operator/(const Rational& other) const {
     Rational copy = *this;
-    Rational copy_other = other;
-    copy /= copy_other;
+    copy /= other;
     return copy;
 }
 
 Rational Rational::operator*(const Rational& other) const {
     Rational copy = *this;
-    Rational copy_other = other;
-    copy *= copy_other;
+    copy *= other;
     return copy;
 }
 
@@ -184,14 +181,12 @@ Rational Rational::operator-() {
 }
 
 Rational Rational::operator--(int) {
-    Reduce();
     Rational temp = *this;
     SetNumerator(num - den);
     return temp;
 }
 
 Rational Rational::operator++(int) {
-    Reduce();
     Rational temp = *this;
     SetNumerator(num + den);
     return temp;
