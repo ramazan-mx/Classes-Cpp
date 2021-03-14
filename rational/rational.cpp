@@ -21,13 +21,13 @@ void Rational::Reduce() {
     den /= gcd;
 }
 
-Rational::Rational() : num(0), den(1) {
+Rational::Rational() : num(0), den(1) {  //  NOLINT
 }
 
 Rational::Rational(int numerator) : num(numerator), den(1) {  // NOLINT
 }
 
-Rational::Rational(int numerator, int denominator) {
+Rational::Rational(int numerator, int denominator) {  //  NOLINT
     if (denominator == 0) {
         throw RationalDivisionByZero{};
     }
