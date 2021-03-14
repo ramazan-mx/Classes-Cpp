@@ -31,7 +31,7 @@ public:
     friend std::istream& operator>>(std::istream& in, Rational& fraction);
     friend std::ostream& operator<<(std::ostream& out, Rational fraction);
 
-    Rational operator+(const Rational& other);
+    const Rational operator+(const Rational& other);
     Rational operator-(const Rational& other);
     Rational operator/(const Rational& other);
     Rational operator*(const Rational& other);

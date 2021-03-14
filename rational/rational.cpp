@@ -134,27 +134,31 @@ Rational& Rational::operator*=(const Rational& other) {
     return *this;
 }
 
-Rational Rational::operator+(const Rational& other) {
+const Rational Rational::operator+(const Rational& other) {
     Rational copy = *this;
-    copy += other;
+    Rational copy_other = other;
+    copy += copy_other;
     return copy;
 }
 
 Rational Rational::operator-(const Rational& other) {
     Rational copy = *this;
-    copy -= other;
+    Rational copy_other = other;
+    copy -= copy_other;
     return copy;
 }
 
 Rational Rational::operator/(const Rational& other) {
     Rational copy = *this;
-    copy /= other;
+    Rational copy_other = other;
+    copy /= copy_other;
     return copy;
 }
 
 Rational Rational::operator*(const Rational& other) {
     Rational copy = *this;
-    copy *= other;
+    Rational copy_other = other;
+    copy *= copy_other;
     return copy;
 }
 
