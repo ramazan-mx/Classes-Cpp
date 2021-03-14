@@ -59,7 +59,7 @@ public:
     bool operator>=(const Rational& other) const;
     bool operator>(const Rational& other) const;
     bool operator<=(const Rational& other) const;
-    bool operator>(int num, const Rational& other) const;
+    friend bool operator>(int num, const Rational& other) const;
 };
 
 #endif  // RATIONAL_RATIONAL_H
