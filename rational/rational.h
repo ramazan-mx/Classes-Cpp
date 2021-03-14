@@ -50,12 +50,12 @@ public:
     Rational operator--(int);
     Rational operator++(int);
 
-    bool operator<(const Rational& other);
-    bool operator==(const Rational& other);
-    bool operator!=(const Rational& other);
-    bool operator>=(const Rational& other);
-    bool operator>(const Rational& other);
-    bool operator<=(const Rational& other);
+    const bool operator<(const Rational& other) const;
+    const bool operator==(const Rational& other) const;
+    const bool operator!=(const Rational& other) const;
+    const bool operator>=(const Rational& other) const;
+    const bool operator>(const Rational& other) const;
+    const bool operator<=(const Rational& other) const;
 };
 
 #endif  // RATIONAL_RATIONAL_H
