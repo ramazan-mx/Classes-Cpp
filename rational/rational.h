@@ -29,7 +29,7 @@ public:
     void SetDenominator(int denominator);
 
     friend std::istream& operator>>(std::istream& in, Rational& fraction);
-    friend std::ostream& operator<<(std::ostream& out, Rational fraction) const;
+    friend std::ostream& operator<<(std::ostream& out, const Rational& fraction);
 
     Rational operator+(const Rational& other) const;
     Rational operator-(const Rational& other) const;

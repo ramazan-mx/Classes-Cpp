@@ -76,7 +76,7 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
     return in;
 }
 
-std::ostream& operator<<(std::ostream& out, Rational fraction) const {
+std::ostream& operator<<(std::ostream& out, const Rational& fraction) {
     if (fraction.GetDenominator() == 1) {
         out << fraction.GetNumerator();
     } else {
