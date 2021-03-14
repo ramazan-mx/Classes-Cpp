@@ -31,10 +31,10 @@ public:
     friend std::istream& operator>>(std::istream& in, Rational& fraction);
     friend std::ostream& operator<<(std::ostream& out, Rational fraction);
 
-    const Rational operator+(const Rational& other);
-    Rational operator-(const Rational& other);
-    Rational operator/(const Rational& other);
-    Rational operator*(const Rational& other);
+    Rational operator+(const Rational& other) const;
+    Rational operator-(const Rational& other) const;
+    Rational operator/(const Rational& other) const;
+    Rational operator*(const Rational& other) const;
 
     Rational& operator+=(const Rational& other);
     Rational& operator-=(const Rational& other);
@@ -50,12 +50,12 @@ public:
     Rational operator--(int);
     Rational operator++(int);
 
-    const bool operator<(const Rational& other) const;
-    const bool operator==(const Rational& other) const;
-    const bool operator!=(const Rational& other) const;
-    const bool operator>=(const Rational& other) const;
-    const bool operator>(const Rational& other) const;
-    const bool operator<=(const Rational& other) const;
+    bool operator<(const Rational& other) const;
+    bool operator==(const Rational& other) const;
+    bool operator!=(const Rational& other) const;
+    bool operator>=(const Rational& other) const;
+    bool operator>(const Rational& other) const;
+    bool operator<=(const Rational& other) const;
 };
 
 #endif  // RATIONAL_RATIONAL_H
