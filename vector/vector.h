@@ -169,7 +169,7 @@ public:
             return;
         }
         for (size_t i = 0; i < size_; ++i) {
-            new_buffer_[i] = buffer_[i];
+            new_buffer[i] = buffer_[i];
         }
         delete[] buffer_;
         buffer_ = new_buffer;
