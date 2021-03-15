@@ -155,10 +155,11 @@ public:
         if (new_cap <= capacity_) {
             return;
         }
+        T* new_buffer = nullptr;
         if (new_cap == 0) {
-            T* new_buffer = nullptr;
+            new_buffer = nullptr;
         } else {
-            T* new_buffer = new T[new_cap];
+            new_buffer = new T[new_cap];
         }
         size_ = std::min(size_, new_cap);
         capacity_ = new_cap;
