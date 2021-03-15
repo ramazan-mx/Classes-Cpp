@@ -168,7 +168,7 @@ public:
             buffer_ = new_buffer;
             return;
         }
-        for (size_t i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size_; ++i) {
             new_buffer_[i] = buffer_[i];
         }
         delete[] buffer_;
