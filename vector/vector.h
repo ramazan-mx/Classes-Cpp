@@ -154,7 +154,7 @@ public:
         std::cerr << new_cap << "\n";
         if (new_cap > capacity_) {
             capacity_ = new_cap;
-            if (new_capacity == 0) {
+            if (new_cap == 0) {
                 return;
             }
             T* new_buffer = new T[capacity_];
