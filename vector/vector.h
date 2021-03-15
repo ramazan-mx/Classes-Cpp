@@ -151,6 +151,7 @@ public:
     }
 
     void Reserve(size_t new_cap) {
+        std::cerr << new_cap << "\n";
         if (new_cap > capacity_) {
             capacity_ = new_cap;
             T* new_buffer = new T[capacity_];
@@ -160,7 +161,7 @@ public:
             delete[] buffer_;
             buffer_ = new_buffer;
         }
-        std::cerr << "Reserve(new_cap) " << size_ << " " << capacity_ << "\n";
+        std::cerr << "Reserve(new_cap) " << size_ << " " << capacity_ <<"\n";
     }
 
     void ShrinkToFit() {
