@@ -56,7 +56,6 @@ public:
             return;
         }
         buffer_ = new T[capacity_];
-        std::cerr << "Vector(cnt) " << size_ << " " << capacity_ << "\n";
     }
 
     Vector(size_t count_elements, const T& value) {
@@ -68,7 +67,6 @@ public:
         }
         buffer_ = new T[capacity_];
         Fill(0, size_, value);
-        std::cerr << "Vector(cnt, value) " << size_ << " " << capacity_ << "\n";
     }
 
     Vector(const Vector<T>& other) {
@@ -82,7 +80,6 @@ public:
             size_ = other.size_;
             capacity_ = other.capacity_;
         }
-        std::cerr << "Vector(other) " << size_ << " " << capacity_ << "\n";
     }
 
     Vector<T>& operator=(const Vector<T>& other) {
@@ -92,24 +89,20 @@ public:
             capacity_ = other.capacity_;
             buffer_ = new T[capacity_];
             Copy(buffer_, other.buffer_, size_);
-            std::cerr << "operator= " << size_ << " " << capacity_ << "\n";
             return *this;
         }
         buffer_ = nullptr;
         size_ = other.size_;
         capacity_ = other.capacity_;
-        std::cerr << "operator= " << size_ << " " << capacity_ << "\n";
         return *this;
     }
 
     ~Vector() {
         delete[] buffer_;
-        std::cerr << "~Vector " << size_ << " " << capacity_ << "\n";
     }
 
     void Clear() {
         size_ = 0;
-        std::cerr << "Clear " << size_ << " " << capacity_ << "\n";
     }
 
     void PushBack(const T& value) {
@@ -123,13 +116,11 @@ public:
             capacity_ = 1;
             size_ = 1;
             buffer_[0] = value;
-            std::cerr << "PushBack " << size_ << " " << capacity_ << "\n";
             return;
         }
         BufferReallocation(capacity_ * 2);
         buffer_[size_] = value;
         ++size_;
-        std::cerr << "PushBack " << size_ << " " << capacity_ << "\n";
     }
 
     void PopBack() {
@@ -137,7 +128,6 @@ public:
             return;
         }
         --size_;
-        std::cerr << "PopBack " << size_ << " " << capacity_ << "\n";
     }
 
     void Resize(size_t new_size) {
@@ -147,24 +137,20 @@ public:
         } else {
             size_ = new_size;
         }
-        std::cerr << "Resize(new_size) " << size_ << " " << capacity_ << "\n";
     }
     void Resize(size_t new_size, T value) {
         if (new_size <= size_) {
             size_ = new_size;
-            std::cerr << "Resize(new_size, value) " << size_ << " " << capacity_ << "\n";
             return;
         }
         if (new_size <= capacity_) {
             Fill(size_, new_size, value);
             size_ = new_size;
-            std::cerr << "Resize(new_size, value) " << size_ << " " << capacity_ << "\n";
             return;
         }
         BufferReallocation(new_size);
         Fill(size_, new_size, value);
         size_ = new_size;
-        std::cerr << "Resize(new_size, value) " << size_ << " " << capacity_ << "\n";
     }
 
     void Reserve(size_t new_cap) {
@@ -172,21 +158,18 @@ public:
         if (new_cap > capacity_) {
             BufferReallocation(new_cap);
         }
-        std::cerr << "Reserve(new_cap) " << size_ << " " << capacity_ << "\n";
     }
 
     void ShrinkToFit() {
         if (capacity_ > size_) {
             BufferReallocation(size_);
         }
-        std::cerr << "ShrinkToFit " << size_ << " " << capacity_ << "\n";
     }
 
     void Swap(Vector<T>& other) {
         std::swap(size_, other.size_);
         std::swap(capacity_, other.capacity_);
         std::swap(buffer_, other.buffer_);
-        std::cerr << "Swap " << size_ << " " << capacity_ << "\n";
     }
 
     T& operator[](const size_t& index) {
