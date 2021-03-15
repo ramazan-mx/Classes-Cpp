@@ -80,7 +80,6 @@ public:
         buffer_ = nullptr;
         size_ = other.size_;
         capacity_ = other.capacity_;
-
     }
 
     Vector<T>& operator=(const Vector<T>& other) {
