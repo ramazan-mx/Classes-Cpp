@@ -153,10 +153,13 @@ public:
     void Reserve(size_t new_cap) {
         std::cerr << new_cap << "\n";
         if (new_cap > capacity_) {
-            capacity_ = new_cap;
-            if (new_cap == 0) {
+            if (capacity_ == 0) {
+                capacity_ = new_cap;
+                delete[] buffer_;
+                buffer_ = new T[capacity_];
                 return;
             }
+            capacity_ = new_cap;
             T* new_buffer = new T[capacity_];
             for (size_t i = 0; i < size_; ++i) {
                 new_buffer[i] = buffer_[i];
