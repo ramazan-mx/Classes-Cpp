@@ -161,7 +161,7 @@ public:
             delete[] buffer_;
             buffer_ = new_buffer;
         }
-        std::cerr << "Reserve(new_cap) " << size_ << " " << capacity_ <<"\n";
+        std::cerr << "Reserve(new_cap) " << size_ << " " << capacity_ << "\n";
     }
 
     void ShrinkToFit() {
