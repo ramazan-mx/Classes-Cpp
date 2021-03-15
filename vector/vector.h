@@ -71,18 +71,22 @@ public:
 
     Vector(const Vector<T>& other) {
         if (other.capacity_ > 0) {
+            buffer_ = new T[other.capacity_];
             size_ = other.size_;
             capacity_ = other.capacity_;
-            buffer_ = new T[capacity_];
             Copy(buffer_, other.buffer_, size_);
-        } else {
-            buffer_ = nullptr;
-            size_ = other.size_;
-            capacity_ = other.capacity_;
+            return;
         }
+        buffer_ = nullptr;
+        size_ = other.size_;
+        capacity_ = other.capacity_;
+
     }
 
     Vector<T>& operator=(const Vector<T>& other) {
+        if (buffer_ == other.buffer_) {
+            return (*this);
+        }
         delete[] buffer_;
         if (other.capacity_ > 0) {
             size_ = other.size_;
