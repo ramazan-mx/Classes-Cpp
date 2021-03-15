@@ -154,6 +154,9 @@ public:
         std::cerr << new_cap << "\n";
         if (new_cap > capacity_) {
             capacity_ = new_cap;
+            if (new_capacity == 0) {
+                return;
+            }
             T* new_buffer = new T[capacity_];
             for (size_t i = 0; i < size_; ++i) {
                 new_buffer[i] = buffer_[i];
