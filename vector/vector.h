@@ -16,6 +16,31 @@ private:
     size_t capacity_ = 0;
     T* buffer_ = nullptr;
 
+    void Copy(T* buffer_to, T* buffer_from, size_t size) {
+        for (size_t i = 0; i < size; ++i) {
+            buffer_to[i] = buffer_from[i];
+        }
+    }
+    void Fill(size_t start, size_t end, const T& value) {
+        for (size_t i = start; i < end; ++i) {
+            buffer_[i] = value;
+        }
+    }
+
+    void BufferReallocation(size_t new_capacity) {
+        T* new_buffer = ((new_capacity == 0) ? nullptr : (new T[new_capacity]));
+        size_ = std::min(size_, new_capacity);
+        capacity_ = new_capacity;
+        if (new_capacity == 0) {
+            delete[] buffer_;
+            buffer_ = new_buffer;
+            return;
+        }
+        Copy(new_buffer, buffer_, size_);
+        delete[] buffer_;
+        buffer_ = new_buffer;
+    }
+
 public:
     Vector() {
         size_ = 0;
@@ -42,9 +67,7 @@ public:
             return;
         }
         buffer_ = new T[capacity_];
-        for (size_t i = 0; i < size_; ++i) {
-            buffer_[i] = value;
-        }
+        Fill(0, size_, value);
         std::cerr << "Vector(cnt, value) " << size_ << " " << capacity_ << "\n";
     }
 
@@ -53,9 +76,7 @@ public:
             size_ = other.size_;
             capacity_ = other.capacity_;
             buffer_ = new T[capacity_];
-            for (size_t i = 0; i < size_; ++i) {
-                buffer_[i] = other.buffer_[i];
-            }
+            Copy(buffer_, other.buffer_, size_);
         } else {
             buffer_ = nullptr;
             size_ = other.size_;
@@ -70,9 +91,7 @@ public:
             size_ = other.size_;
             capacity_ = other.capacity_;
             buffer_ = new T[capacity_];
-            for (size_t i = 0; i < size_; ++i) {
-                buffer_[i] = other.buffer_[i];
-            }
+            Copy(buffer_, other.buffer_, size_);
             std::cerr << "operator= " << size_ << " " << capacity_ << "\n";
             return *this;
         }
@@ -99,7 +118,15 @@ public:
             ++size_;
             return;
         }
-        Reserve(capacity_ * 2);
+        if (buffer_ == nullptr) {
+            buffer_ = new T[1];
+            capacity_ = 1;
+            size_ = 1;
+            buffer_[0] = value;
+            std::cerr << "PushBack " << size_ << " " << capacity_ << "\n";
+            return;
+        }
+        BufferReallocation(capacity_ * 2);
         buffer_[size_] = value;
         ++size_;
         std::cerr << "PushBack " << size_ << " " << capacity_ << "\n";
@@ -115,7 +142,7 @@ public:
 
     void Resize(size_t new_size) {
         if (new_size > capacity_) {
-            Reserve(new_size);
+            BufferReallocation(new_size);
             size_ = new_size;
         } else {
             size_ = new_size;
@@ -123,74 +150,34 @@ public:
         std::cerr << "Resize(new_size) " << size_ << " " << capacity_ << "\n";
     }
     void Resize(size_t new_size, T value) {
-        if (new_size > capacity_) {
-            T* new_buffer = new T[new_size];
-            capacity_ = new_size;
-            for (size_t i = 0; i < size_; ++i) {
-                new_buffer[i] = buffer_[i];
-            }
-            delete[] buffer_;
-            buffer_ = new_buffer;
-            for (size_t i = size_; i < new_size; ++i) {
-                buffer_[i] = value;
-            }
+        if (new_size <= size_) {
             size_ = new_size;
             std::cerr << "Resize(new_size, value) " << size_ << " " << capacity_ << "\n";
             return;
         }
-        if (new_size > size_) {
-            for (size_t i = size_; i < new_size; ++i) {
-                buffer_[i] = value;
-            }
+        if (new_size <= capacity_) {
+            Fill(size_, new_size, value);
             size_ = new_size;
             std::cerr << "Resize(new_size, value) " << size_ << " " << capacity_ << "\n";
             return;
         }
+        BufferReallocation(new_size);
+        Fill(size_, new_size, value);
         size_ = new_size;
         std::cerr << "Resize(new_size, value) " << size_ << " " << capacity_ << "\n";
     }
 
     void Reserve(size_t new_cap) {
         std::cerr << new_cap << "\n";
-        if (new_cap <= capacity_) {
-            return;
+        if (new_cap > capacity_) {
+            BufferReallocation(new_cap);
         }
-        T* new_buffer = nullptr;
-        if (new_cap == 0) {
-            new_buffer = nullptr;
-        } else {
-            new_buffer = new T[new_cap];
-        }
-        size_ = std::min(size_, new_cap);
-        capacity_ = new_cap;
-        if (new_cap == 0) {
-            delete[] buffer_;
-            buffer_ = new_buffer;
-            return;
-        }
-        for (size_t i = 0; i < size_; ++i) {
-            new_buffer[i] = buffer_[i];
-        }
-        delete[] buffer_;
-        buffer_ = new_buffer;
         std::cerr << "Reserve(new_cap) " << size_ << " " << capacity_ << "\n";
     }
 
     void ShrinkToFit() {
         if (capacity_ > size_) {
-            capacity_ = size_;
-            if (capacity_ == 0) {
-                delete[] buffer_;
-                buffer_ = nullptr;
-                std::cerr << "ShrinkToFit " << size_ << " " << capacity_ << "\n";
-                return;
-            }
-            T* new_buffer = new T[capacity_];
-            for (size_t i = 0; i < size_; ++i) {
-                new_buffer[i] = buffer_[i];
-            }
-            delete[] buffer_;
-            buffer_ = new_buffer;
+            BufferReallocation(size_);
         }
         std::cerr << "ShrinkToFit " << size_ << " " << capacity_ << "\n";
     }
