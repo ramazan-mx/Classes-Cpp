@@ -138,7 +138,7 @@ public:
             size_ = new_size;
         }
     }
-    void Resize(size_t new_size, T value) {
+    void Resize(size_t new_size, const T& value) {
         if (new_size <= size_) {
             size_ = new_size;
             return;
