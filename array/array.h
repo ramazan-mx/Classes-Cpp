@@ -2,7 +2,6 @@
 #define ARRAY_ARRAY_H
 
 #include <iterator>
-#include <stdexcept>
 
 class ArrayOutOfRange : public std::out_of_range {
 public:
@@ -11,7 +10,8 @@ public:
 };
 
 template <class T, size_t N>
-struct Array {
+class Array {
+public:
     T arr[N];
 
     T& operator[](size_t index) {
@@ -74,23 +74,30 @@ struct Array {
         return arr[idx];
     }
 
-    void Swap(Array<T, N>& other) {  // NOLINT
+    void Swap(Array<T, N>& other) {
         for (size_t i = 0; i < N; ++i) {
             std::swap(arr[i], other.arr[i]);
         }
     }
 
+    namespace std {
+        template<class T, size_t N>
+        void swap(Array<T, N> &first, Array<T, N> &second) {  //  NOLINT
+            first.Swap(second);
+        }
+    }
+
     bool operator<(const Array<T, N>& other) const {
         size_t pos = 0;
-        while (pos < N && arr[pos] == other.arr[pos]) {
+        while ((pos < N) && (arr[pos] == other.arr[pos])) {
             pos++;
         }
-        return (pos < N && arr[pos] < other.arr[pos]);
+        return ((pos < N) && (arr[pos] < other.arr[pos]));
     }
 
     bool operator==(const Array<T, N>& other) const {
         size_t pos = 0;
-        while (pos < N && arr[pos] == other.arr[pos]) {
+        while ((pos < N) && (arr[pos] == other.arr[pos])) {
             pos++;
         }
         return (pos == N);
@@ -98,24 +105,18 @@ struct Array {
 
     bool operator!=(const Array<T, N>& other) const {
         size_t pos = 0;
-        while (pos < N && arr[pos] == other.arr[pos]) {
+        while ((pos < N) && (arr[pos] == other.arr[pos])) {
             pos++;
         }
         return (pos != N);
     }
 
-    /*void operator=(const Array<T, N>& other) {
-        for (size_t i = 0; i < N; ++i) {
-            *this[i] = other[i];
-        }
-    }*/
-
     bool operator>=(const Array<T, N>& other) const {
         size_t pos = 0;
-        while (pos < N && arr[pos] == other.arr[pos]) {
+        while ((pos < N) && (arr[pos] == other.arr[pos])) {
             pos++;
         }
-        return ((pos < N && arr[pos] > other.arr[pos]) || pos == N);
+        return ((pos < N) && (arr[pos] > (other.arr[pos]) || pos == N));
     }
 
     bool operator>(const Array<T, N>& other) const {
