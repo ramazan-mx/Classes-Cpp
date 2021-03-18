@@ -12,8 +12,10 @@ public:
 template <class T>
 class Vector {
 private:
-    size_t size_ = 0;
-    size_t capacity_ = 0;
+    static const size_t kGrowthFactor = 2;
+
+    size_t size_;
+    size_t capacity_;
     T* buffer_ = nullptr;
 
     void Copy(T* buffer_to, T* buffer_from, size_t size) {
@@ -121,7 +123,7 @@ public:
             buffer_[0] = value;
             return;
         }
-        BufferReallocation(capacity_ * 2);
+        BufferReallocation(capacity_ * kGrowthFactor);
         buffer_[size_] = value;
         ++size_;
     }
