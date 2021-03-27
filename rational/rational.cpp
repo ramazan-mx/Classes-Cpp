@@ -15,36 +15,36 @@ int GCD(int u, int v) {
 }
 
 void Rational::Reduce() {
-    if (den == 0) {
+    if (den_ == 0) {
         throw RationalDivisionByZero{};
     }
-    int gcd = GCD(abs(num), abs(den));
-    if (den < 0) {
-        den *= -1;
-        num *= -1;
+    int gcd = GCD(abs(num_), abs(den_));
+    if (den_ < 0) {
+        den_ *= -1;
+        num_ *= -1;
     }
-    num /= gcd;
-    den /= gcd;
+    num_ /= gcd;
+    den_ /= gcd;
 }
 
-Rational::Rational() : num(0), den(1) {  //  NOLINT
+Rational::Rational() : num_(0), den_(1) {  //  NOLINT
 }
 
-Rational::Rational(int numerator) : num(numerator), den(1) {  // NOLINT
+Rational::Rational(int numerator) : num_(numerator), den_(1) {  // NOLINT
 }
 
 Rational::Rational(int numerator, int denominator) {  //  NOLINT
     if (denominator == 0) {
         throw RationalDivisionByZero{};
     }
-    num = numerator;
-    den = denominator;
+    num_ = numerator;
+    den_ = denominator;
     Reduce();
 }
 
 Rational::Rational(const Rational& other) {
-    num = other.num;
-    den = other.den;
+    num_ = other.num_;
+    den_ = other.den_;
     Reduce();
 }
 
@@ -53,7 +53,7 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
     char str[MaxStringSize];
     in >> str;
     int i = 0;
-    int x = 0;
+    int read_number = 0;
     int mod = 1;
     if (str[0] == '-') {
         mod = -1;
@@ -62,13 +62,13 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
         ++i;
     }
     for (; str[i] >= '0' && str[i] <= '9'; ++i) {
-        x *= 10;
-        x += str[i] - '0';
+        read_number *= 10;
+        read_number += str[i] - '0';
     }
-    fraction.num = (x * mod);
+    fraction.num_ = (read_number * mod);
     if (str[i] != '\0') {
         ++i;
-        x = 0;
+        read_number = 0;
         mod = 1;
         if (str[i] == '-') {
             mod = -1;
@@ -77,10 +77,10 @@ std::istream& operator>>(std::istream& in, Rational& fraction) {
             ++i;
         }
         for (; str[i] >= '0' && str[i] <= '9'; ++i) {
-            x *= 10;
-            x += str[i] - '0';
+            read_number *= 10;
+            read_number += str[i] - '0';
         }
-        fraction.den = (x * mod);
+        fraction.den_ = (read_number * mod);
     } else {
         fraction.SetDenominator(1);
     }
@@ -98,40 +98,40 @@ std::ostream& operator<<(std::ostream& out, const Rational& fraction) {
 }
 
 int Rational::GetNumerator() const {
-    return num;
+    return num_;
 }
 
 int Rational::GetDenominator() const {
-    return den;
+    return den_;
 }
 
 void Rational::SetNumerator(int numerator) {
-    num = numerator;
+    num_ = numerator;
     Reduce();
 }
 
 void Rational::SetDenominator(int denominator) {
-    den = denominator;
+    den_ = denominator;
     Reduce();
 }
 
 const Rational& Rational::operator=(const Rational& other) {
-    num = other.num;
-    den = other.den;
+    num_ = other.num_;
+    den_ = other.den_;
     Reduce();
     return *this;
 }
 
 Rational& Rational::operator+=(const Rational& other) {
-    num = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
-    den = GetDenominator() * other.GetDenominator();
+    num_ = (GetNumerator() * other.GetDenominator()) + (other.GetNumerator() * GetDenominator());
+    den_ = GetDenominator() * other.GetDenominator();
     Reduce();
     return *this;
 }
 
 Rational& Rational::operator-=(const Rational& other) {
-    num = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
-    den = GetDenominator() * other.GetDenominator();
+    num_ = (GetNumerator() * other.GetDenominator()) - (other.GetNumerator() * GetDenominator());
+    den_ = GetDenominator() * other.GetDenominator();
     Reduce();
     return *this;
 }
@@ -146,8 +146,8 @@ Rational& Rational::operator/=(const Rational& other) {
 }
 
 Rational& Rational::operator*=(const Rational& other) {
-    num = GetNumerator() * other.GetNumerator();
-    den = GetDenominator() * other.GetDenominator();
+    num_ = GetNumerator() * other.GetNumerator();
+    den_ = GetDenominator() * other.GetDenominator();
     Reduce();
     return *this;
 }
@@ -187,23 +187,23 @@ Rational Rational::operator-() {
 
 Rational Rational::operator--(int) {
     Rational temp = *this;
-    SetNumerator(num - den);
+    SetNumerator(num_ - den_);
     return temp;
 }
 
 Rational Rational::operator++(int) {
     Rational temp = *this;
-    SetNumerator(num + den);
+    SetNumerator(num_ + den_);
     return temp;
 }
 
 Rational& Rational::operator--() {
-    SetNumerator(num - den);
+    SetNumerator(num_ - den_);
     return *this;
 }
 
 Rational& Rational::operator++() {
-    SetNumerator(num + den);
+    SetNumerator(num_ + den_);
     return *this;
 }
 
@@ -212,7 +212,7 @@ bool Rational::operator<(const Rational& other) const {
 }
 
 bool Rational::operator==(const Rational& other) const {
-    return ((num == other.num) && (den == other.den));
+    return ((num_ == other.num_) && (den_ == other.den_));
 }
 
 bool Rational::operator!=(const Rational& other) const {

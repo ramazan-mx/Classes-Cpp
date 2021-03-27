@@ -13,8 +13,8 @@ public:
 
 class Rational {
 private:
-    int num;
-    int den;
+    int num_;
+    int den_;
     void Reduce();
 
 public:
