@@ -4,6 +4,7 @@
 #define RATIONAL_RATIONAL_H
 
 #include <util/constants.h>
+#include <iostream>
 
 class RationalDivisionByZero : public std::runtime_error {
 public:

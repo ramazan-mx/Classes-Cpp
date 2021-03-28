@@ -1,17 +1,15 @@
 #include <iostream>
+#include <exception>
 #include <numeric>
 #include <stdlib.h>
 #include "rational.h"
 
 int GCD(int u, int v) {
-    while (v && u) {
+    while (v) {
         u %= v;
         std::swap(u, v);
     }
-    if (u) {
-        return u;
-    }
-    return v;
+    return u;
 }
 
 void Rational::Reduce() {
