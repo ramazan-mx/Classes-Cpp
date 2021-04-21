@@ -18,16 +18,9 @@ before_script:
         - make
         - cp libgtest* /usr/lib
         - cd ..
-        - git submodule update --remote
-
+        - git submodule update --remote --merge
 test:
         stage: test
         script:
                 - cd public_tests
-                - ./test_solution.sh $CI_COMMIT_BRANCH
-                - cd ..
-                - git clone  https://$TESTER:$TESTING_TOKEN@gitlab.com/VladimirVolodya/secret_tests.git
-
-                - cd secret_tests
-                - ./test_solution.sh $CI_COMMIT_BRANCH
-
+                - timeout -s SIGKILL 2m ./test_solution.sh $CI_COMMIT_BRANCH
